@@ -6,6 +6,11 @@ class Binary
 
    BINARY = {0=>0, 1=>1} 
 
+
+    def value_of_binary(n)
+        return 2**n
+    end
+
     def isNegative?(n)
         if n < 0 
             true 
@@ -53,8 +58,34 @@ class Binary
       return (conversion(n.abs/2) + converted)
     end
 
-    
+    def convert_binary_to_decimal(n)
+        if n.to_s.length < 2 
+            return n.to_s
+        end
+
+        check = n.to_s.split("").all? {|i| self.is_binary?(i.to_i)}
+       
+        if check 
+            binary = n.to_s.split("").reverse
+            i = binary.length
+            sum = 0 
+            while i >= 0 
+                if binary[i] == "1"
+                value = self.value_of_binary(i)
+                    sum += value
+                end
+                i -= 1 
+            end
+            return sum.to_s
+        else
+            return "Not a binary number"
+        end
+        
+        
+    end
+
 end
+
 
 
 # hard code
@@ -72,7 +103,8 @@ end
     #            decimal /= 2
     #         end         
     #     end
-        
+#         ary-Hex-Conversion]$ ruby Machine.rb 
+# Please enter the numb
     #     self.isNegative?(decimal) ? converted[0] = 1 : converted[0] = 0 
     #     return converted.join("")
     # end
